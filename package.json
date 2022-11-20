@@ -3,7 +3,8 @@
 	"scripts": {
 		"build": "tsc",
 		"dev": "tsx  watch src/app.ts",
-		"prepare": "husky install"
+		"prepare": "husky install",
+		"test": "vitest"
 	},
 	"dependencies": {
 		"@fastify/jwt": "^6.3.3",

@@ -38,7 +38,7 @@ Create .gitignore file and add the following:
 
 ## Add scripts to package.json
 
-`"scripts": { "build": "tsc", "dev":"tsx watch src/app.ts" }`
+`"scripts": { "build": "tsc", "dev":"tsx watch src/app.ts", "test":"vitest" }`
 
 ## Initialise Prisma
 

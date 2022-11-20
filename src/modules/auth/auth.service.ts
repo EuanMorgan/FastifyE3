@@ -1,7 +1,8 @@
-import prisma from "src/utils/prisma";
+import prisma from "../../utils/prisma";
+import { RegisterUserInput } from "./auth.schema";
 
 // TODO: type input
-export const createUser = async (input: any) => {
+export const createUser = async (input: RegisterUserInput) => {
 	return prisma.user.create({
 		data: {
 			email: input.email,

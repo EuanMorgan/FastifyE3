@@ -1,6 +1,6 @@
 import { FastifyPluginOptions } from "fastify";
 import { FastifyInstance } from "fastify";
-import { defaultResponse, errorResponse } from "src/types/globalSchemas";
+import { defaultResponse, errorResponse } from "../../types/globalSchemas";
 import { getMeHandler, loginHandler, registerHandler } from "./auth.controller";
 import {
 	getMeResponseSchema,

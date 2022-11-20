@@ -1,7 +1,7 @@
 import fastify from "fastify";
 import config from "./config";
 import { loggerConfig } from "./logger";
-import authRoutes from "src/modules/auth/auth.route";
+import authRoutes from "../modules/auth/auth.route";
 import fjwt from "./plugins/jwt";
 import {
 	validatorCompiler,
