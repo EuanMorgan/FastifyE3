@@ -16,12 +16,14 @@
 		"env-schema": "^5.1.1",
 		"fastify": "^4.10.0",
 		"fastify-plugin": "^4.3.0",
+		"fastify-type-provider-zod": "^1.1.7",
 		"nanoid": "^4.0.0",
 		"zod": "^3.19.1"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^17.2.0",
 		"@commitlint/config-conventional": "^17.2.0",
+		"@types/bcryptjs": "^2.4.2",
 		"@types/node": "^18.11.9",
 		"husky": "^8.0.0",
 		"pino-pretty": "^9.1.1",

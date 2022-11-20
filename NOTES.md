@@ -3,9 +3,9 @@
 ```
 yarn init
 
-yarn add fastify env-schema @fastify/swagger @fastify/swagger-ui nanoid @fastify/type-provider-json-schema-to-ts @sinclair/typebox @prisma/client zod @fastify/jwt bcryptjs fastify-plugin
+yarn add fastify env-schema @fastify/swagger @fastify/swagger-ui nanoid @fastify/type-provider-json-schema-to-ts @sinclair/typebox @prisma/client zod @fastify/jwt bcryptjs fastify-plugin fastify-type-provider-zod
 
-yarn add @types/node typescript @commitlint/config-conventional @commitlint/cli husky prettier vitest tsx prisma pino-pretty -D
+yarn add @types/node typescript @commitlint/config-conventional @commitlint/cli husky prettier vitest tsx prisma pino-pretty @types/bcryptjs -D
 ```
 
 ## Initialise TypeScript

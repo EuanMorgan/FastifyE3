@@ -1,32 +1,51 @@
 import { FastifyPluginOptions } from "fastify";
 import { FastifyInstance } from "fastify";
+import { defaultResponse } from "src/types/globalSchemas";
+import { getMeHandler, loginHandler, registerHandler } from "./auth.controller";
+import { loginInputSchema, registerUserInputSchema, userSchema } from "./auth.schema";
 
-const authRoutes = (
-	app: FastifyInstance,
-	options: FastifyPluginOptions,
-	done: () => void
-) => {
-	app.get("/", req => {
-		const jwt = req.jwt.sign(
-			{
-				id: 1,
-				username: "test",
+// Main flow is request -> route -> controller -> service -> database
+// The reason for this is we can test the controller and service functions
+// Services are where the DB calls should happen because that makes it easier to isolate and
+// test the DB calls. The controller is where we do the business logic
+// It's important to use something like Prometheus to track the performance of the database calls
+// if we have these bundled into the controllers, it would be harder to track the performance of the DB calls
+const authRoutes = (app: FastifyInstance, options: FastifyPluginOptions, done: () => void) => {
+	app.post(
+		"/register",
+		{
+			schema: {
+				body: registerUserInputSchema,
+				response: {
+					201: defaultResponse,
+					409: defaultResponse,
+				},
 			},
-			{
-				expiresIn: "1h",
-			}
-		);
-		return { hello: "world", jwt };
-	});
+		},
+		registerHandler
+	);
+
+	app.post(
+		"/login",
+		{
+			schema: {
+				body: loginInputSchema,
+			},
+		},
+		loginHandler
+	);
 
 	app.get(
-		"/verify",
+		"/me",
 		{
 			onRequest: app.authenticate,
+			schema: {
+				response: {
+					200: userSchema,
+				},
+			},
 		},
-		req => {
-			return { hello: "world", user: req.user };
-		}
+		getMeHandler
 	);
 
 	// Call the done callback when you are finished
