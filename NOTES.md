@@ -127,3 +127,7 @@ Add the following to package.json
 	"**/*": "prettier --write --ignore-unknown"
 }
 ```
+
+After creating the Dockerfile, docker-compose.yml and Caddyfile
+We need to assign our domain to a server IP address.
+Then we can run ./deploy.sh on the server
