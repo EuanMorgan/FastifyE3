@@ -1,20 +1,10 @@
-import envSchema from 'env-schema';
-import {Type, Static} from '@sinclair/typebox';
-// Typesafe environment variables
-
-const schema = Type.Object({
-  HOST: Type.String({
-    default: '0.0.0.0',
-  }),
-  PORT: Type.Number({
-    default: 4000,
-  }),
-  DATABASE_URL: Type.String(),
+import {z} from 'zod';
+import dotenv from 'dotenv';
+dotenv.config();
+const schema = z.object({
+  HOST: z.string().default('0.0.0.0'),
+  PORT: z.number().default(4000),
+  DATABASE_URL: z.string(),
 });
 
-type Env = Static<typeof schema>;
-
-export const config = envSchema<Env>({
-  schema,
-  dotenv: true,
-});
+export const config = schema.parse(process.env);
