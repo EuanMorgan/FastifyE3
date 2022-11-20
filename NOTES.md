@@ -56,6 +56,10 @@ Put all your code in the src folder.
 
 ## Husky && commitlint
 
+I'm not sure yet if I agree with pre-commit hooks, however this one is cool to enforce convetions.
+
+https://www.conventionalcommits.org/en/v1.0.0/
+
 yarn husky install
 
 touch .husky/commit-msg
@@ -73,15 +77,32 @@ touch commitlint.config.js
 
 ```js
 module.exports = {
-  extends: ['@commitlint/config-conventional'],
+	extends: ["@commitlint/config-conventional"],
 };
 ```
 
 ## Setup prettier
 
-echo {}> .prettierrc.json
+Create a .prettierrc.json
+Define some rules to match your preferences, I like
 
-touch .prettierignore
+```json
+{
+	"semi": true,
+	"singleQuote": false,
+	"arrowParens": "avoid",
+	"useTabs": true,
+	"tabWidth": 2
+}
+```
+
+Create a .prettierignore
+
+```shell
+node_modules
+build
+.nyc_output
+```
 
 touch .husky/pre-commit
 
@@ -92,4 +113,12 @@ chmod a+x .husky/pre-commit
 . "$(dirname -- "$0")/_/husky.sh"
 
 npx lint-staged
+```
+
+Add the following to package.json
+
+```json
+"lint-staged": {
+	"**/*": "prettier --write --ignore-unknown"
+}
 ```
