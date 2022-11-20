@@ -36,6 +36,20 @@ Create .gitignore file and add the following:
 
 `"scripts": { "build": "tsc", "dev":"tsx watch src/app.ts" }`
 
+## Initialise Prisma
+
+```
+npx prisma init
+```
+
+### Modify a few options in prisma/schema.prisma
+
+Prisma will create a .env with a DATABASE_URL variable. Modify this to point to your database.
+
+It will also create a prisma folder with a schema.prisma, this is where we define our database schema.
+
+Ensure that the options in datasource are correct (it defaults to postgresql).
+
 ## Folder structure
 
 Put all your code in the src folder.

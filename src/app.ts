@@ -8,7 +8,5 @@ const startServer = async () => {
     host: config.HOST, //NOTE: It is important to define the host
     // as 0.0.0.0 for docker as it doesn't know what localhost is
   });
-
-  console.log(`Server listening `);
 };
 startServer();
