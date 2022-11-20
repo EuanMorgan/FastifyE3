@@ -1,4 +1,4 @@
-import { config } from "./utils/config";
+import config from "./utils/config";
 import { createServer } from "./utils/createServer";
 import logger from "./utils/logger";
 import prisma from "./utils/prisma";
