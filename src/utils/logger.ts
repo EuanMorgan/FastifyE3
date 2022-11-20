@@ -19,7 +19,7 @@ export const envToLogger = {
 // The logger is attatched the the fastify instance and request objects
 // So we can use it in our routes
 // However, we export a global logger here to use it in other places
-
+// todo - disable in production
 const logger = pino(envToLogger['development']);
 
 export default logger;
