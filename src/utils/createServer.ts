@@ -3,9 +3,15 @@ import config from "./config";
 import { loggerConfig } from "./logger";
 import authRoutes from "src/modules/auth/auth.route";
 import fjwt from "./plugins/jwt";
-import { validatorCompiler, serializerCompiler } from "fastify-type-provider-zod";
+import {
+	validatorCompiler,
+	serializerCompiler,
+	jsonSchemaTransform,
+} from "fastify-type-provider-zod";
 import errorHandler from "./plugins/errorHandler";
-
+import fastifySwagger from "@fastify/swagger";
+import fastifySwaggerUi from "@fastify/swagger-ui";
+import { version } from "../../package.json";
 // Encapsulate the server creation in a function
 // so we can use it in tests
 export const createServer = async () => {
@@ -39,6 +45,34 @@ export const createServer = async () => {
 	// Zod is a validation library that allows us to create schemas and use those as our json schema validation
 	app.setValidatorCompiler(validatorCompiler);
 	app.setSerializerCompiler(serializerCompiler);
+
+	// Swagger
+	app.register(fastifySwagger, {
+		transform: jsonSchemaTransform, //hook up to zod
+		openapi: {
+			info: {
+				title: "Create E3 Fastify",
+				description: "Create E3 Fastify",
+				version,
+			},
+			components: {
+				securitySchemes: {
+					bearerAuth: {
+						type: "http",
+						scheme: "bearer",
+						bearerFormat: "JWT",
+						description:
+							"JWT Authorization header using the Bearer scheme. Put your access token in the header. Example: 'Authorization: Bearer {token}'",
+					},
+				},
+			},
+		},
+	});
+
+	app.register(fastifySwaggerUi, {
+		routePrefix: "/docs",
+		staticCSP: true,
+	});
 
 	// Register routes
 	// Add prefixes to the routes so they are all under /api/:moduleName

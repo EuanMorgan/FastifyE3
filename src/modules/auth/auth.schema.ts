@@ -18,6 +18,14 @@ export type RegisterUserInput = z.infer<typeof registerUserInputSchema>;
 export const loginInputSchema = baseAuthSchema;
 export type LoginInput = z.infer<typeof loginInputSchema>;
 
-export const userSchema = registerUserInputSchema.extend({
-	id: z.number(),
+export const loginResponseSchema = z.object({
+	accessToken: z.string(),
 });
+
+export const getMeResponseSchema = registerUserInputSchema
+	.omit({
+		password: true,
+	})
+	.extend({
+		id: z.number(),
+	});

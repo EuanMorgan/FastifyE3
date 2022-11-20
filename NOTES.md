@@ -16,7 +16,11 @@ npx tsc --init
 
 ### Modify a few options in tsconfig.json
 
-`"outDir":"./build"`
+```json
+"outDir":"./build" //output built files to build folder
+"baseUrl":"./src" //allow for absolute imports, i.e. import Test from 'src/tests' instead of import Test from'../../../tests'
+"resolveJsonModule":true //Allow us to import JSON, specifically the package.json to get the version
+```
 
 ## Initialise git repository
 
@@ -59,6 +63,7 @@ Put all your code in the src folder.
 I'm not sure yet if I agree with pre-commit hooks, however this one is cool to enforce convetions.
 
 https://www.conventionalcommits.org/en/v1.0.0/
+https://gkarthiks.github.io/quick-commands-cheat-sheet/conventional-commit-verbs.html
 
 yarn husky install
 

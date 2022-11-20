@@ -53,9 +53,10 @@ export const loginHandler = async (
 		}
 		// I'm using zod to validate the JWT payload, so we can just safely pass the full user object
 		// and it ill strip out any extra fields
-		const token = request.jwt.sign(jwtSchema.parse(user), { expiresIn: "15m" });
+		console.log(user);
+		const accessToken = request.jwt.sign(jwtSchema.parse(user), { expiresIn: "15m" });
 		return reply.send({
-			token,
+			accessToken,
 		});
 	} catch (error) {
 		if (error instanceof Error) {
@@ -73,7 +74,5 @@ export const loginHandler = async (
 export const getMeHandler = async (request: FastifyRequest, reply: FastifyReply) => {
 	const user = await getUserById(request.user.id);
 
-	return reply.send({
-		user,
-	});
+	return reply.send(user);
 };

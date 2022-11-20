@@ -8,7 +8,7 @@ import { z } from "zod";
 // And ensure the user object is of the type we expect
 export const jwtSchema = z.object({
 	id: z.number(),
-	email: z.string(),
+	email: z.string().email(),
 });
 export type JWTUser = z.infer<typeof jwtSchema> & {
 	sessionId: string;
