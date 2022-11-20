@@ -1,0 +1,6 @@
+fastify.euanmorgan.uk {
+     #request container on port 4000
+    reverse_proxy e3-app:4000 {
+        header_down Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+    }
+}

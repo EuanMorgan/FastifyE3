@@ -8,5 +8,18 @@ services:
       - NODE_ENV=production
     build:
       context: ./
+  caddy:
+    image: caddy/caddy:2.2.1-alpine
+    container_name: caddy-services
+    restart: unless-stopped
     ports:
-      - 4000:4000
+      - 80:80 # We can accept HTTP requests on port 80 and redirect to HTTPS
+      - 443:443 #HTTPS
+    volumes:
+      - $PWD/Caddyfile:/etc/caddy/Caddyfile # Mount our Caddyfile
+      - $PWD/site:/services # Mount our site folder
+      - caddy_data:/data # Mount our data folder
+      - caddy_config:/config # Mount our config folder
+volumes:
+  caddy_data:
+  caddy_config:

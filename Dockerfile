@@ -22,6 +22,5 @@ RUN npx prisma generate
 RUN npm run-script build
 
 # We don't need to expose the port because we are using a reverse proxy
-EXPOSE 4000
 
 CMD ["node", "build/src/app.js"]
