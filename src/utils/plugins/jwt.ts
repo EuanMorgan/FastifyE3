@@ -1,11 +1,6 @@
-import type {
-	FastifyInstance,
-	FastifyRequest,
-	FastifyReply,
-	FastifyPluginOptions,
-} from "fastify";
+import type { FastifyInstance, FastifyRequest, FastifyReply, FastifyPluginOptions } from "fastify";
 import jwt from "@fastify/jwt";
-import config from "./config";
+import config from "../config";
 import fp from "fastify-plugin";
 import { z } from "zod";
 
@@ -21,11 +16,7 @@ export type JWTUser = z.infer<typeof jwtSchema> & {
 	exp: number;
 };
 
-const fjwt = (
-	app: FastifyInstance,
-	options: FastifyPluginOptions,
-	done: () => void
-) => {
+const fjwt = (app: FastifyInstance, options: FastifyPluginOptions, done: () => void) => {
 	// Configuration for @fastify/jwt
 
 	app.register(jwt, {
@@ -39,16 +30,13 @@ const fjwt = (
 	// This decorator simply calls jwt verify
 	// https://www.fastify.io/docs/latest/Reference/Decorators/
 	// We also need to tell typescript about this decorator, I do in types.d.ts
-	app.decorate(
-		"authenticate",
-		async (request: FastifyRequest, reply: FastifyReply) => {
-			try {
-				await request.jwtVerify();
-			} catch (err) {
-				reply.send(err);
-			}
+	app.decorate("authenticate", async (request: FastifyRequest, reply: FastifyReply) => {
+		try {
+			await request.jwtVerify();
+		} catch (err) {
+			reply.send(err);
 		}
-	);
+	});
 
 	// I want the jwt methods be available on the request object
 	// so we can use them in the controllers, therefore I am going to

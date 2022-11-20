@@ -1,6 +1,6 @@
 import { FastifyPluginOptions } from "fastify";
 import { FastifyInstance } from "fastify";
-import { defaultResponse } from "src/types/globalSchemas";
+import { defaultResponse, errorResponse } from "src/types/globalSchemas";
 import { getMeHandler, loginHandler, registerHandler } from "./auth.controller";
 import { loginInputSchema, registerUserInputSchema, userSchema } from "./auth.schema";
 
@@ -18,7 +18,7 @@ const authRoutes = (app: FastifyInstance, options: FastifyPluginOptions, done: (
 				body: registerUserInputSchema,
 				response: {
 					201: defaultResponse,
-					409: defaultResponse,
+					409: errorResponse,
 				},
 			},
 		},

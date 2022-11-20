@@ -1,7 +1,7 @@
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime";
 import { FastifyRequest, FastifyReply } from "fastify";
 import { compareHash, generateHash } from "src/utils/bcrypt";
-import { jwtSchema } from "src/utils/jwt";
+import { jwtSchema } from "src/utils/plugins/jwt";
 import { LoginInput, RegisterUserInput } from "./auth.schema";
 import { createUser, getUserByEmail, getUserById } from "./auth.service";
 
