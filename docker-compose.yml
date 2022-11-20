@@ -1,0 +1,12 @@
+# Docker compose makes it easier to run our container
+version: "3.7"
+services:
+  e3-app:
+    container_name: e3-app
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    build:
+      context: ./
+    ports:
+      - 4000:4000
