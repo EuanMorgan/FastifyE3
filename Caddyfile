@@ -1,6 +1,7 @@
 fastify.euanmorgan.uk {
      #request container on port 4000
     reverse_proxy e3-app:4000 {
+        # https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security
         header_down Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
     }
 }
