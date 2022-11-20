@@ -69,6 +69,14 @@ npx --no -- commitlint --edit "\${1}"
 
 chmod a+x .husky/commit-msg
 
+touch commitlint.config.js
+
+```js
+module.exports = {
+  extends: ['@commitlint/config-conventional'],
+};
+```
+
 ## Setup prettier
 
 echo {}> .prettierrc.json
